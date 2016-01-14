@@ -16,4 +16,4 @@ before_script:
   - gem install --no-ri --no-rdoc cucumber
 
 script:
-  - gradle
+  - gradle cucumber_tcl
