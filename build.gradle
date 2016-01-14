@@ -50,7 +50,7 @@ task cucumber_tcl() << {
         execute( tclsh_cli.join(' '), [io:windows()/*wait for io on windows*/, wait:false, log_prefix:'tcl'] )
 
         // start cucumber
-        sleep 1000 // wait for the interpreter to start (not very efficient)
+        // sleep 1000 // wait for the interpreter to start (not very efficient)
         println cucumber_cli
         execute( cucumber_cli.join(' '), [io:true, wait:true] )
     }
