@@ -31,8 +31,6 @@ ext.timestamp = "${->new Date().format('yyyyMMddHHmmssSSS')}"
 task cucumber_tcl() << {
     description 'run the tcl test suite in the background and start cucumber'
 
-    println suite
-
     // not quite right, as the features may contain a larger set of steps than each suite in itself
     get_suite_scripts(suite).each { suite_script ->
         // cucumber command line
