@@ -2,6 +2,8 @@
 
 This project is intended as an investigation, whether Cucumber-Tcl can be executed via the Cucumber [Wire](http://www.relishapp.com/cucumber/cucumber/docs/wire-protocol) protocol.
 
+[![Build Status](https://travis-ci.org/d-led/cucumber-tcl-wire.svg?branch=master)](https://travis-ci.org/d-led/cucumber-tcl-wire)
+
 The motivation behind the use-case is that in case an embedded (as in, in a larger app) Tcl interpreter is used, it might not be viable to link it to Ruby. Starting the wire server might also be a non-standard task, in case the interpreter is not exposed to the command line.
 
 Here, the standard tcl interpreter `tclsh` is used by default. 
