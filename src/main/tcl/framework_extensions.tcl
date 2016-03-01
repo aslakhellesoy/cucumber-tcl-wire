@@ -26,10 +26,15 @@ proc ::cucumber::_add_step args {
     return 0
   }
 
-  # an attempt at saving the source of the step definition
-  # 3 in [info frame..] is a magic number that only works in this constellation of [source]s
-  # haven't come up with a more robust way yet
-  set location "[file tail [uplevel 3 {info script}]]:[dict get [info frame 3] line]"
+  proc get_location {} {
+    set caller_framelevel [expr [info frame] - 1]
+    set up [expr $caller_framelevel - 3]
+    set fr [expr $caller_framelevel - 2]
+    set location "[uplevel $up {info script}]:[dict get [info frame $fr] line]"
+    return $location
+  }
+
+  set location [get_location]
 
   lappend STEPS [list $re $params $body $location]
 }

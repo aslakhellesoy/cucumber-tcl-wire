@@ -9,7 +9,12 @@ sourceLocalFile {../../../../cucumber-ruby-tcl/lib/cucumber/tcl/framework.tcl}
 sourceLocalFile {../../../main/tcl/framework_extensions.tcl}
 sourceLocalFile {../../../main/tcl/server.tcl}
 
-# load the suite steps
+# the step location is now more robust against framelevel variation
+# if {1} {
+# 	if {1} {
+# 		sourceLocalFile {steps.tcl}
+# 	}
+# }
 sourceLocalFile {steps.tcl}
 
 ::cucumber::tcl::wire::startServer 33333
