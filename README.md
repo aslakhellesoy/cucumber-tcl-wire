@@ -16,7 +16,7 @@ In this repository, the standard tcl interpreter `tclsh` is used by default, but
 
 `gradle -Dtcl=wish`
 
-## Keeping the interpreter window open / logging its output ## 
+## Keeping the interpreter window open / logging its output
 
 `gradle -Dpause=true`
 
