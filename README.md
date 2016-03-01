@@ -4,11 +4,9 @@ This project is intended as an investigation, whether Cucumber-Tcl can be execut
 
 [![Build Status](https://travis-ci.org/d-led/cucumber-tcl-wire.svg?branch=master)](https://travis-ci.org/d-led/cucumber-tcl-wire)
 
-Issue in the official repo: [#36](https://github.com/cucumber/cucumber-ruby-tcl/issues/36)
+In case an embedded (as in, in a larger app) Tcl interpreter is used, it might not be viable to link it to Ruby. Starting the wire server might also be a non-standard task if the interpreter is not exposed to the command line. Thus, the added flexibility using Cucumber over the wire.
 
-The motivation behind the use-case is that in case an embedded (as in, in a larger app) Tcl interpreter is used, it might not be viable to link it to Ruby. Starting the wire server might also be a non-standard task, in case the interpreter is not exposed to the command line.
-
-Here, the standard tcl interpreter `tclsh` is used by default. 
+In this repository, the standard tcl interpreter `tclsh` is used by default, but the framework can be use by other interpreters just as well.
 
 ## Running the self-test ##
 
@@ -30,4 +28,4 @@ This project builds upon the original [cucumber-ruby-tcl](https://github.com/cuc
 
 [server.tcl](src/main/tcl/server.tcl) is the partial implementation of the wire protocol, allowing to start the server using `::cucumber::tcl::wire::startServer 33333`.
 
-Sourcing of the step definitions is automated only in the [build config](build.gradle), and all necessary sources are loaded in the ["suite"](src/test/tcl/step_definitions/suite.tcl).
+Locating and sourcing the step definitions is automated only in the [build config](build.gradle), and not in the framework itself. All necessary sources, and the framework are sourced in the ["suite"](src/test/tcl/step_definitions/suite.tcl).
