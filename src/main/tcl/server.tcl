@@ -11,17 +11,19 @@ namespace eval ::cucumber::tcl::wire:: {
     proc log {args} {
         puts $args
     }
+
+    variable last_session
 }
 
 proc ::cucumber::tcl::wire::startServer {port} {
-    global end 0
+    global stop_cucumber_server 0
     set s [socket -server accept $port]
-    vwait end
+    vwait stop_cucumber_server
     log "Tcl cucumber wire server stopped"
 }
 
 proc ::cucumber::tcl::wire::accept {sock addr port} {
-    global last_session
+    variable last_session
 
     log "Accepting $sock from $addr port $port"
     set last_session(addr,$sock) [list $addr $port]
@@ -116,14 +118,14 @@ proc ::cucumber::tcl::wire::getArgs {jsonValue} {
 }
 
 proc ::cucumber::tcl::wire::processRequest {sock} {
-    global last_session
+    variable last_session
 
     if {[eof $sock] || [catch {gets $sock line}]} {
         close $sock
         log "Closed $last_session(addr,$sock)"
         unset last_session(addr,$sock)
-        global end
-        set end 1
+        global stop_cucumber_server
+        set stop_cucumber_server 1
     } elseif { [string length $line] > 0 } {
         log "received: $line"
 
