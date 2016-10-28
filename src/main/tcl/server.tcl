@@ -16,7 +16,6 @@ namespace eval ::cucumber::tcl::wire:: {
 proc ::cucumber::tcl::wire::startServer {port} {
     global end 0
     set s [socket -server accept $port]
-    after 10000 set end 1
     vwait end
     log "Tcl cucumber wire server stopped"
 }
