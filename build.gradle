@@ -28,31 +28,33 @@ ext.timestamp = "${->new Date().format('yyyyMMddHHmmssSSS')}"
 
 /*** Tasks ******************************************************************************/
 
-task cucumber_tcl() << {
+task cucumber_tcl() {
     description 'run the tcl test suite in the background and start cucumber'
 
-    // not quite right, as the features may contain a larger set of steps than each suite in itself
-    get_suite_scripts(suite).each { suite_script ->
-        // cucumber command line
-        def cucumber_cli = [
-            'cucumber',
-            extra_options,
-            file(features).absolutePath,
-            output_options(suite_script)
-        ]
+    doLast {
+        // not quite right, as the features may contain a larger set of steps than each suite in itself
+        get_suite_scripts(suite).each { suite_script ->
+            // cucumber command line
+            def cucumber_cli = [
+                'cucumber',
+                extra_options,
+                file(features).absolutePath,
+                output_options(suite_script)
+            ]
 
-        def pause_cli = (windows() && pause?.toBoolean()) ? 'cmd /K' : ''
-        def prefix = windows() ? ['start', pause_cli] : []
-        def tclsh_cli = prefix + [tcl, suite_script]
+            def pause_cli = (windows() && pause?.toBoolean()) ? 'cmd /K' : ''
+            def prefix = windows() ? ['start', pause_cli] : []
+            def tclsh_cli = prefix + [tcl, suite_script]
 
-        // start tcl
-        println tclsh_cli
-        execute( tclsh_cli.join(' '), [io:windows()/*wait for io on windows*/, wait:false, log_prefix:'tcl'] )
+            // start tcl
+            println tclsh_cli
+            execute( tclsh_cli.join(' '), [io:windows()/*wait for io on windows*/, wait:false, log_prefix:'tcl'] )
 
-        // start cucumber
-        // sleep 1000 // wait for the interpreter to start (not very efficient)
-        println cucumber_cli
-        execute( cucumber_cli.join(' '), [io:true, wait:true] )
+            // start cucumber
+            // sleep 1000 // wait for the interpreter to start (not very efficient)
+            println cucumber_cli
+            execute( cucumber_cli.join(' '), [io:true, wait:true] )
+        }
     }
 }
 
