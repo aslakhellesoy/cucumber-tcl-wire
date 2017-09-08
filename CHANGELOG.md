@@ -16,7 +16,7 @@ Please visit [cucumber/CONTRIBUTING.md](https://github.com/cucumber/cucumber/blo
 
 ### Added
 
-* Added this CHANGELOG.md file per [cucumber/cucumber #251](https://github.com/cucumber/cucumber/issues/251) (TBD)
+* Added this CHANGELOG.md file per [cucumber/cucumber #251](https://github.com/cucumber/cucumber/issues/251) ([#1](https://github.com/cucumber/cucumber-tcl-wire/pull/1) [jaysonesmith](https://github.com/jaysonesmith))
 
 ### Changed
 
